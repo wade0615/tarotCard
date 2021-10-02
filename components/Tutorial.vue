@@ -27,7 +27,7 @@ export default ({
     }
   },
   mounted() {
-    this.cards = this.setCards(78);
+    this.cards = this.setCards(5);
   },
   methods: {
     setCards(num) {
@@ -41,15 +41,19 @@ export default ({
       return Math.floor(Math.random()*(max-min+1))+min;
     },
     getThreeCards() {
-      const firstCard = this.getRangeRandom(1, this.cards.length);
-      this.cards.splice(firstCard, 1);
-      const secondCard = this.getRangeRandom(1, this.cards.length);
-      this.cards.splice(secondCard, 1);
-      const thirdCard = this.getRangeRandom(1, this.cards.length);
-      this.cards.splice(thirdCard, 1);
-      this.cardsResult = `${firstCard},${secondCard},${thirdCard}`
+      const firstCardIndex = this.getRangeRandom(1, this.cards.length);
+      const firstCard = this.cards.splice(firstCardIndex, 1);
+      console.log(this.cards.length);
+      const secondCardIndex = this.getRangeRandom(1, this.cards.length);
+      const secondCard = this.cards.splice(secondCardIndex, 1);
+      console.log(this.cards.length);
+      const thirdCardIndex = this.getRangeRandom(1, this.cards.length);
+      const thirdCard = this.cards.splice(thirdCardIndex, 1);
+      console.log(this.cards.length);
+      // this.cardsResult = `${firstCardIndex},${secondCardIndex},${thirdCardIndex}`;
+      this.cardsResult = firstCard.concat(secondCard.concat(thirdCard)).join(",");
 
-      this.cards = this.setCards(78);
+      this.cards = this.setCards(5);
     }
   },
 })
