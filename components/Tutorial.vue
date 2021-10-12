@@ -11,7 +11,11 @@
         抽牌！
       </button>
       <section class="py-3">
-        result: {{ cardsResult }}
+        result:
+        <br />
+        <p>{{ firstCard }}</p>
+        <p>{{ secondCard }}</p>
+        <p>{{ thirdCard }}</p>
       </section>
     </div>
   </main>
@@ -24,39 +28,38 @@ export default ({
   data() {
     return {
       cards: [],
-      totalCards: 78,
+      totalCards: tarotCards.length,
+      firstCard: null,
+      secondCard: null,
+      thirdCard: null,
       cardsResult: null,
     }
   },
   mounted() {
-    console.log(tarotCards);
-    this.cards = this.setCards(5);
+    // this.cards = this.setCards(5);
+    this.cards = Array.from(tarotCards);
   },
   methods: {
-    setCards(num) {
-      const cards = [];
-      for (let i = 0; i < num; i++) {
-        cards.push(i);
-      };
-      return cards;
-    },
+    // setCards(num) {
+    //   const cards = [];
+    //   for (let i = 0; i < num; i++) {
+    //     cards.push(i);
+    //   };
+    //   return cards;
+    // },
     getRangeRandom(min,max){
       return Math.floor(Math.random()*(max-min+1))+min;
     },
     getThreeCards() {
-      const firstCardIndex = this.getRangeRandom(1, this.cards.length);
-      const firstCard = this.cards.splice(firstCardIndex, 1);
-      console.log(this.cards.length);
-      const secondCardIndex = this.getRangeRandom(1, this.cards.length);
-      const secondCard = this.cards.splice(secondCardIndex, 1);
-      console.log(this.cards.length);
-      const thirdCardIndex = this.getRangeRandom(1, this.cards.length);
-      const thirdCard = this.cards.splice(thirdCardIndex, 1);
-      console.log(this.cards.length);
-      // this.cardsResult = `${firstCardIndex},${secondCardIndex},${thirdCardIndex}`;
-      this.cardsResult = firstCard.concat(secondCard.concat(thirdCard)).join(",");
+      const firstCardIndex = this.getRangeRandom(0, this.cards.length - 1);
+      this.firstCard = this.cards.splice(firstCardIndex, 1)[0].name;
+      const secondCardIndex = this.getRangeRandom(0, this.cards.length - 1);
+      this.secondCard = this.cards.splice(secondCardIndex, 1)[0].name;
+      const thirdCardIndex = this.getRangeRandom(0, this.cards.length - 1);
+      this.thirdCard = this.cards.splice(thirdCardIndex, 1)[0].name;
 
-      this.cards = this.setCards(5);
+      // this.cards = this.setCards(5);
+      this.cards = Array.from(tarotCards);
     }
   },
 })
