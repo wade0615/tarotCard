@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import tarotCards from "@/static/cards/index.js";
+
 export default ({
   data() {
     return {
@@ -27,6 +29,7 @@ export default ({
     }
   },
   mounted() {
+    console.log(tarotCards);
     this.cards = this.setCards(5);
   },
   methods: {
